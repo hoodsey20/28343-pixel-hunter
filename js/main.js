@@ -27,10 +27,23 @@ const arrows = document.createRange().createContextualFragment(arrowsTemplate);
 const arrowsButtons = arrows.querySelectorAll(`.arrows__btn`);
 
 let currentScreen = 0;
+
 const switchScreen = (templateNumber) => {
   while (mainScreen.hasChildNodes()) {
     mainScreen.removeChild(mainScreen.lastChild);
   }
   const content = document.importNode(screenTemplates[templateNumber].content, true);
   mainScreen.appendChild(content);
+};
+
+const goToNextScreen = () => {
+  if (currentScreen < screenTemplates.length - 1) {
+    switchScreen(++currentScreen);
+  }
+};
+
+const goToPrevScreen = () => {
+  if (currentScreen > 0) {
+    switchScreen(--currentScreen);
+  }
 };
