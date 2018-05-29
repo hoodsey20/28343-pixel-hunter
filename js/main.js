@@ -48,5 +48,19 @@ const goToPrevScreen = () => {
   }
 };
 
+const onKeyDown = (evt) => {
+  switch (evt.keyCode) {
+    case keyCodes.ARROW_LEFT:
+      goToPrevScreen();
+      break;
+    case keyCodes.ARROW_RIGHT:
+      goToNextScreen();
+      break;
+    default:
+      break;
+  }
+};
+
 switchScreen(currentScreen);
 
+document.addEventListener(`keydown`, onKeyDown);
