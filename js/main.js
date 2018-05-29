@@ -47,3 +47,6 @@ const goToPrevScreen = () => {
     switchScreen(--currentScreen);
   }
 };
+
+switchScreen(currentScreen);
+
