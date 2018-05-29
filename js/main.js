@@ -27,3 +27,10 @@ const arrows = document.createRange().createContextualFragment(arrowsTemplate);
 const arrowsButtons = arrows.querySelectorAll(`.arrows__btn`);
 
 let currentScreen = 0;
+const switchScreen = (templateNumber) => {
+  while (mainScreen.hasChildNodes()) {
+    mainScreen.removeChild(mainScreen.lastChild);
+  }
+  const content = document.importNode(screenTemplates[templateNumber].content, true);
+  mainScreen.appendChild(content);
+};
