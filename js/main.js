@@ -64,3 +64,7 @@ const onKeyDown = (evt) => {
 switchScreen(currentScreen);
 
 document.addEventListener(`keydown`, onKeyDown);
+
+arrowsButtons[0].addEventListener(`click`, goToPrevScreen);
+arrowsButtons[1].addEventListener(`click`, goToNextScreen);
+document.body.appendChild(arrows);
