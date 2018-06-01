@@ -1,4 +1,5 @@
-import {getElementFromTemplate} from './util.js';
+import {getElementFromTemplate, renderScreen} from './util.js';
+import rulesScreen from './rules-screen.js';
 
 const greetingScreen = getElementFromTemplate(`<div class="greeting central--blur">
     <div class="greeting__logo"><img src="img/logo_big.png" width="201" height="89" alt="Pixel Hunter"></div>
@@ -25,3 +26,5 @@ const greetingScreen = getElementFromTemplate(`<div class="greeting central--blu
   </footer>`);
 
 export default greetingScreen;
+
+greetingScreen.querySelector(`.greeting__continue`).addEventListener(`click`, () => renderScreen(rulesScreen));

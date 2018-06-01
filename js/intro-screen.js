@@ -1,4 +1,5 @@
-import {getElementFromTemplate} from './util.js';
+import {getElementFromTemplate, renderScreen} from './util.js';
+import greetingScreen from './greeting-screen.js';
 
 const introScreen = getElementFromTemplate(`<div id="main" class="central__content">
   <div id="intro" class="intro">
@@ -18,3 +19,5 @@ const introScreen = getElementFromTemplate(`<div id="main" class="central__conte
 </footer>`);
 
 export default introScreen;
+
+introScreen.querySelector(`.intro__asterisk`).addEventListener(`click`, () => renderScreen(greetingScreen));

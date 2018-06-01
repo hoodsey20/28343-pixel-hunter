@@ -1,4 +1,5 @@
-import {getElementFromTemplate} from './util.js';
+import {getElementFromTemplate, renderScreen} from './util.js';
+import firstGameScreen from './game-1-screen';
 
 const rulesScreen = getElementFromTemplate(`<header class="header">
   <div class="header__back">
@@ -36,3 +37,16 @@ const rulesScreen = getElementFromTemplate(`<header class="header">
 </footer>`);
 
 export default rulesScreen;
+
+const rulesForm = rulesScreen.querySelector(`.rules__form`);
+const rulesInput = rulesForm.querySelector(`.rules__input`);
+const rulesButton = rulesForm.querySelector(`.rules__button`);
+
+rulesInput.addEventListener(`change`, (evt) => {
+  rulesButton.disabled = !evt.target.value.trim();
+});
+
+rulesForm.addEventListener(`submit`, (evt) => {
+  evt.preventDefault();
+  renderScreen(firstGameScreen);
+});

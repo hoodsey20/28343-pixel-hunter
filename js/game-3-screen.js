@@ -1,4 +1,5 @@
-import {getElementFromTemplate} from './util.js';
+import {getElementFromTemplate, renderScreen} from './util.js';
+import statsScreen from './stats-screen';
 
 const thirdGameScreen = getElementFromTemplate(`<header class="header">
   <div class="header__back">
@@ -54,3 +55,7 @@ const thirdGameScreen = getElementFromTemplate(`<header class="header">
 </footer>`);
 
 export default thirdGameScreen;
+
+thirdGameScreen.querySelectorAll(`.game__option`).forEach((option) => {
+  option.addEventListener(`click`, () => renderScreen(statsScreen));
+});

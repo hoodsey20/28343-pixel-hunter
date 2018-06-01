@@ -1,4 +1,5 @@
-import {getElementFromTemplate} from './util.js';
+import {getElementFromTemplate, renderScreen} from './util.js';
+import secondGameScreen from './game-2-screen';
 
 const firstGameScreen = getElementFromTemplate(`<header class="header">
   <div class="header__back">
@@ -67,3 +68,15 @@ const firstGameScreen = getElementFromTemplate(`<header class="header">
 </footer>`);
 
 export default firstGameScreen;
+
+const gameForm = firstGameScreen.querySelector(`.game__content`);
+
+const radioChangeHandler = () => {
+  if (gameForm.querySelector(`[name="question1"]:checked`) && gameForm.querySelector(`[name="question2"]:checked`)) {
+    renderScreen(secondGameScreen);
+  }
+};
+
+gameForm.querySelectorAll(`[type="radio"]`).forEach((radio) => {
+  radio.addEventListener(`change`, radioChangeHandler);
+});

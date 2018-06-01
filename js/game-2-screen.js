@@ -1,4 +1,5 @@
-import {getElementFromTemplate} from './util.js';
+import {getElementFromTemplate, renderScreen} from './util.js';
+import thirdGameScreen from './game-3-screen';
 
 const secondGameScreen = getElementFromTemplate(`<header class="header">
   <div class="header__back">
@@ -56,3 +57,7 @@ const secondGameScreen = getElementFromTemplate(`<header class="header">
 </footer>`);
 
 export default secondGameScreen;
+
+secondGameScreen.querySelectorAll(`[type="radio"]`).forEach((radio) => {
+  radio.addEventListener(`change`, () => renderScreen(thirdGameScreen));
+});
