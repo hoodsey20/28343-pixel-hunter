@@ -1,9 +1,11 @@
-export const getElementFromTemplate = (template) => document.createRange().createContextualFragment(template);
+export const getElementFromTemplate = (template) => {
+  const wrapper = document.createElement(`div`);
+  wrapper.innerHTML = template.trim();
+  return wrapper;
+};
 
 export const renderScreen = (screenContent) => {
   const mainScreen = document.querySelector(`.central`);
-  while (mainScreen.hasChildNodes()) {
-    mainScreen.removeChild(mainScreen.lastChild);
-  }
+  mainScreen.innerHTML = ``;
   mainScreen.appendChild(screenContent);
 };
