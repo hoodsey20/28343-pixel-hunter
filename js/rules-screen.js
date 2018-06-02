@@ -42,7 +42,7 @@ const rulesForm = rulesScreen.querySelector(`.rules__form`);
 const rulesInput = rulesForm.querySelector(`.rules__input`);
 const rulesButton = rulesForm.querySelector(`.rules__button`);
 
-rulesInput.addEventListener(`change`, (evt) => {
+rulesInput.addEventListener(`keyup`, (evt) => {
   rulesButton.disabled = !evt.target.value.trim();
 });
 
