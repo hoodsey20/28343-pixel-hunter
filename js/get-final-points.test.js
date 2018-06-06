@@ -7,7 +7,7 @@ const defaultAnswers = Array.from(Array(mainConditions.QUESTIONS)).map(() => (
 ));
 
 
-describe(`Game data`, () => {
+describe(`getFinalPoints`, () => {
 
   it(`should return -1 when the answers array length < 10`, () => {
     assert.equal(getFinalPoints(defaultAnswers.slice(0, 0)), -1);
