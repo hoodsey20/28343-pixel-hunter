@@ -15,8 +15,23 @@ describe(`getFinalPoints`, () => {
     assert.equal(getFinalPoints(defaultAnswers.slice(0, 8)), -1);
   });
 
+  it(`should not allow set non number value of lives`, () => {
+    assert.throws(() => getFinalPoints(defaultAnswers, `3`), /Lives should be of type number/);
+  });
+
+  it(`should not allow set negative values of lives`, () => {
+    assert.throws(() => getFinalPoints(defaultAnswers, -1), /Lives should not be negative value/);
+  });
+
   it(`should return 1150 when the all answers correct with normal time and all lives saved`, () => {
     assert.equal(getFinalPoints(defaultAnswers, mainConditions.LIFES), 1150);
+  });
+
+  it(`should return 0 when the all answers incorrect and 0 lives saved`, () => {
+    assert.equal(getFinalPoints(
+        defaultAnswers.map(() => ({status: false, time: timerConditions.SLOW + 1})),
+        0
+    ), 0);
   });
 
   it(`should return 1100 when the all answers correct with normal time and 2 lives saved`, () => {
@@ -43,14 +58,6 @@ describe(`getFinalPoints`, () => {
         defaultAnswers.map(() => ({status: true, time: timerConditions.QUICK - 1})),
         mainConditions.LIFES
     ), 1650);
-  });
-
-  it(`should not allow set non number value of lives`, () => {
-    assert.throws(() => getFinalPoints(defaultAnswers, `3`), /Lives should be of type number/);
-  });
-
-  it(`should not allow set negative values of lives`, () => {
-    assert.throws(() => getFinalPoints(defaultAnswers, -1), /Lives should not be negative value/);
   });
 
   it(`should return 650 when the 5 answers correct with normal time and all lives saved`, () => {
