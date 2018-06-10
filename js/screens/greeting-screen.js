@@ -1,6 +1,7 @@
-import {getElementFromTemplate, renderScreen} from './util.js';
-import {footerTemplate} from './footer.js';
-import rulesScreen from './rules-screen.js';
+import {getInitialState} from './../data/game-data';
+import {getElementFromTemplate, renderScreen} from './../util';
+import {footerTemplate} from './../chunks/footer';
+import rulesScreen from './rules-screen';
 
 const greetingScreen = getElementFromTemplate(`<div class="greeting central--blur">
     <div class="greeting__logo"><img src="img/logo_big.png" width="201" height="89" alt="Pixel Hunter"></div>
@@ -18,4 +19,4 @@ const greetingScreen = getElementFromTemplate(`<div class="greeting central--blu
 
 export default greetingScreen;
 
-greetingScreen.querySelector(`.greeting__continue`).addEventListener(`click`, () => renderScreen(rulesScreen));
+greetingScreen.querySelector(`.greeting__continue`).addEventListener(`click`, () => renderScreen(rulesScreen(getInitialState())));

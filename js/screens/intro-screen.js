@@ -1,6 +1,6 @@
-import {getElementFromTemplate, renderScreen} from './util.js';
-import {footerTemplate} from './footer.js';
-import greetingScreen from './greeting-screen.js';
+import {getElementFromTemplate, renderScreen} from './../util';
+import {footerTemplate} from './../chunks/footer';
+import greetingScreen from './greeting-screen';
 
 const introScreen = getElementFromTemplate(`<div id="main" class="central__content">
   <div id="intro" class="intro">
