@@ -1,6 +1,6 @@
 import {assert} from 'chai';
 import {changeGameState} from './../change-game-state';
-import {getInitialState} from './data/game-data';
+import {getInitialState} from './../data/game-data';
 
 const correctAnswerSample = {
   time: 15,
@@ -35,7 +35,7 @@ describe(`changeGameState`, () => {
 
   it(`should not allow set currentQuestion more then 10`, () => {
     const tenLevelState = getInitialState();
-    tenLevelState.currentQuestion = 10;
+    tenLevelState.currentQuestion = 11;
     assert.throws(() => changeGameState(tenLevelState, correctAnswerSample), /should not allow set currentQuestion more then 10/);
   });
 
