@@ -1,20 +1,18 @@
+import {answerStatus} from './consts';
+import {getAnswerStatus} from './get-answer-status';
+
 export const mainConditions = {
   QUESTIONS: 10,
   LIFES: 3,
 };
 
-const points = {
-  LIFE: 50,
-  NORMAL: 100,
-  QUICK: 150,
-  SLOW: 50,
-};
+const points = new Map();
+points.set(`LIFE`, 50);
+points.set(answerStatus.WRONG, 0);
+points.set(answerStatus.SLOW, 50);
+points.set(answerStatus.CORRECT, 100);
+points.set(answerStatus.FAST, 150);
 
-export const timerConditions = {
-  QUICK: 10,
-  SLOW: 20,
-  MAX: 30,
-};
 
 export const getFinalPoints = (answers, lives) => {
   if (answers.length < mainConditions.QUESTIONS) {
@@ -32,18 +30,11 @@ export const getFinalPoints = (answers, lives) => {
   let result = 0;
 
   answers.forEach((answer) => {
-    if (answer.status === true) {
-      if (answer.time < timerConditions.QUICK) {
-        result += points.QUICK;
-      } else if (answer.time > timerConditions.SLOW) {
-        result += points.SLOW;
-      } else {
-        result += points.NORMAL;
-      }
-    }
+    const currentStatus = getAnswerStatus(answer);
+    result += points.get(currentStatus);
   });
 
-  result += lives * points.LIFE;
+  result += lives * points.get(`LIFE`);
 
   return result;
 };
