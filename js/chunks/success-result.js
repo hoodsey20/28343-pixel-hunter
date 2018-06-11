@@ -42,7 +42,7 @@ export const successResultTemplate = (number, answers, lifes) => {
   let fastAnswersLength = 0;
   let slowAnswersLength = 0;
 
-  answers.map((item) => {
+  for (let item of answers) {
     const status = getAnswerStatus(item);
 
     if (status !== answerStatus.WRONG) {
@@ -56,7 +56,7 @@ export const successResultTemplate = (number, answers, lifes) => {
     if (status === answerStatus.SLOW) {
       slowAnswersLength++;
     }
-  });
+  }
 
   let content = `<table class="result__table">
     <tr>
