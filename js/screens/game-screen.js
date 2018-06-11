@@ -16,18 +16,13 @@ const gameScreen = (data) => {
   const content = `${headerTemplate(currentData)}
     <div class="game">
       <p class="game__task">${question.title}</p>
-      ${gameForm(question)}
+      ${gameForm(question.type).form(question)}
       <div class="stats">
         ${statsTemplate(currentData.answers)}
       </div>
     </div>${footerTemplate}`;
 
   const gameElement = getElementFromTemplate(content);
-
-  const form = gameElement.querySelector(`.game__content`);
-  const answer = {
-    number: data.currentQuestion,
-  };
 
   const handleChangeScreen = (currentAnswer) => {
     const answerResult = checkAnswer(question, currentAnswer);
@@ -39,48 +34,10 @@ const gameScreen = (data) => {
       renderScreen(statsScreen(nextState, true));
     } else {
       renderScreen(gameScreen(nextState));
-
     }
   };
 
-  switch (question.type) {
-    case `single`:
-
-      form.querySelectorAll(`[type="radio"]`).forEach((radio) => {
-        radio.addEventListener(`change`, () => {
-          answer.question1 = form.querySelector(`[name="question1"]:checked`).value;
-          handleChangeScreen(answer);
-        });
-      });
-      break;
-
-    case `couple`:
-
-      const radioChangeHandler = () => {
-        if (form.querySelector(`[name="question1"]:checked`) && form.querySelector(`[name="question2"]:checked`)) {
-          answer.question1 = form.querySelector(`[name="question1"]:checked`).value;
-          answer.question2 = form.querySelector(`[name="question2"]:checked`).value;
-          handleChangeScreen(answer);
-        }
-      };
-
-      form.querySelectorAll(`[type="radio"]`).forEach((radio) => {
-        radio.addEventListener(`change`, radioChangeHandler);
-      });
-
-      break;
-
-    case `triple`:
-
-      form.querySelectorAll(`.game__option`).forEach((option) => {
-        option.addEventListener(`click`, function (evt) {
-          answer.question1 = Number(evt.target.dataset.number);
-          handleChangeScreen(answer);
-        });
-      });
-
-      break;
-  }
+  gameForm(question.type).handler(gameElement, {number: data.currentQuestion}, handleChangeScreen);
 
   return gameElement;
 };
