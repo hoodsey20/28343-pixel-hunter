@@ -1,8 +1,5 @@
 export const headerTemplate = (state) => {
-  const currentState = Object.assign({}, state);
-  if (currentState.lifes < 0) {
-    currentState.lifes = 0;
-  }
+  const lifesToShow = state.lifes > -1 ? state.lifes : 0;
 
   return `<header class="header">
     <div class="header__back">
@@ -11,12 +8,12 @@ export const headerTemplate = (state) => {
         <img src="img/logo_small.svg" width="101" height="44">
       </button>
     </div>
-    <h1 class="game__timer">${currentState.timer}</h1>
+    <h1 class="game__timer">${state.timer}</h1>
     <div class="game__lives">
-      ${new Array(3 - currentState.lifes)
+      ${new Array(3 - lifesToShow)
           .fill(`<img src="img/heart__empty.svg" class="game__heart" alt="Life" width="32" height="32">`)
           .join(``)}
-      ${new Array(currentState.lifes)
+      ${new Array(lifesToShow)
         .fill(`<img src="img/heart__full.svg" class="game__heart" alt="Life" width="32" height="32">`)
         .join(``)}
     </div>
