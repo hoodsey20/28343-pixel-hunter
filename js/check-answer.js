@@ -1,7 +1,6 @@
 import {questionTypes} from './consts';
 
 export const checkAnswer = (question, answer) => {
-
   if (typeof question !== `object` || question === null) {
     throw new Error(`Question should be of type object and not null`);
   }

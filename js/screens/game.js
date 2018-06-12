@@ -1,24 +1,16 @@
 import AbstractView from './../view/abstract';
-import StatisticsView from './statistics';
-import GreetingView from './greeting';
-
-import {renderScreen} from './../util';
 
 import {statsTemplate} from './../chunks/stats';
 import {headerTemplate} from './../chunks/header';
 import {footerTemplate} from './../chunks/footer';
 import gameForm from './../chunks/game-form';
 
-import {gameQuestions} from './../data/game-data';
-import {changeGameState} from './../change-game-state';
-import {checkAnswer} from './../check-answer';
-
 
 export default class GameView extends AbstractView {
-  constructor(data) {
+  constructor(data, question) {
     super();
     this._gameData = data;
-    this._question = gameQuestions[data.currentQuestion - 1];
+    this._question = question;
   }
 
   get template() {
@@ -32,30 +24,20 @@ export default class GameView extends AbstractView {
       </div>${footerTemplate}`;
   }
 
-  bind(element) {
-    const handleChangeScreen = (answer) => {
-      const answerResult = checkAnswer(this._question, answer);
-      const nextState = changeGameState(this._gameData, answerResult);
-      let nextScreen;
+  get gameState() {
+    return this._gameData;
+  }
 
-      if (nextState.lifes < 0) {
-        nextScreen = new StatisticsView(nextState, false).element;
-      } else if (nextState.currentQuestion > 10) {
-        nextScreen = new StatisticsView(nextState, true).element;
-      } else {
-        nextScreen = new GameView(nextState).element;
-      }
-      renderScreen(nextScreen);
-    };
+  onAnswer() {
+  }
+
+  bind(element) {
 
     gameForm(this._question.type).handler(
         element,
         {number: this._gameData.currentQuestion},
-        handleChangeScreen
+        this.onAnswer(this._gameData)
     );
 
-    element.querySelector(`button.back`).addEventListener(`click`, () => {
-      renderScreen(new GreetingView().element);
-    });
   }
 }

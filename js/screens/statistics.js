@@ -1,7 +1,4 @@
 import AbstractView from './../view/abstract';
-import GreetingView from './greeting';
-
-import {renderScreen} from './../util';
 
 import {headerTemplate} from './../chunks/header';
 import {footerTemplate} from './../chunks/footer';
@@ -27,9 +24,12 @@ export default class StatisticsView extends AbstractView {
     </div>${footerTemplate}`;
   }
 
+  onBack() {
+  }
+
   bind(element) {
     element.querySelector(`button.back`).addEventListener(`click`, () => {
-      renderScreen(new GreetingView().element);
+      this.onBack();
     });
   }
 }

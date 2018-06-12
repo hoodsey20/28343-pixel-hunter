@@ -1,6 +1,4 @@
 import AbstractView from './../view/abstract';
-import GreetingView from './greeting';
-import {renderScreen} from './../util';
 import {footerTemplate} from './../chunks/footer';
 
 
@@ -14,9 +12,12 @@ export default class IntroView extends AbstractView {
     </div>${footerTemplate}`;
   }
 
+  onClick() {
+  }
+
   bind(element) {
     element.querySelector(`.intro__asterisk`).addEventListener(`click`, () => {
-      renderScreen(new GreetingView().element);
+      this.onClick();
     });
   }
 }

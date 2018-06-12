@@ -1,8 +1,4 @@
 import AbstractView from './../view/abstract';
-import GameView from './game';
-import GreetingView from './greeting';
-
-import {renderScreen} from './../util';
 
 import {headerTemplate} from './../chunks/header';
 import {footerTemplate} from './../chunks/footer';
@@ -34,6 +30,12 @@ export default class RulesView extends AbstractView {
     </div>${footerTemplate}`;
   }
 
+  onBack() {
+  }
+
+  onSubmit() {
+  }
+
   bind(element) {
     const rulesForm = element.querySelector(`.rules__form`);
     const rulesInput = rulesForm.querySelector(`.rules__input`);
@@ -46,12 +48,11 @@ export default class RulesView extends AbstractView {
     rulesForm.addEventListener(`submit`, (evt) => {
       evt.preventDefault();
       this._gameData.currentQuestion = 1;
-      renderScreen(new GameView(this._gameData).element);
+      this.onSubmit(this._gameData);
     });
 
     element.querySelector(`button.back`).addEventListener(`click`, () => {
-      renderScreen(new GreetingView().element);
+      this.onBack();
     });
-
   }
 }

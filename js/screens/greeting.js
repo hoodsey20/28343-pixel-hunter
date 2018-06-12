@@ -1,9 +1,5 @@
 import AbstractView from './../view/abstract';
-import RulesView from './rules';
-import {renderScreen} from './../util';
-import {getInitialState} from './../data/game-data';
 import {footerTemplate} from './../chunks/footer';
-
 
 export default class GreetingView extends AbstractView {
   get template() {
@@ -22,10 +18,12 @@ export default class GreetingView extends AbstractView {
       </div>${footerTemplate}`;
   }
 
+  onClick() {
+  }
+
   bind(element) {
-    const initialState = getInitialState();
     element.querySelector(`.greeting__continue`).addEventListener(`click`, () => {
-      renderScreen(new RulesView(initialState).element);
+      this.onClick();
     });
   }
 }
