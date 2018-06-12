@@ -11,3 +11,9 @@ export const timerConditions = {
   SLOW: 20,
   MAX: 30,
 };
+
+export const questionTypes = {
+  SIGNLE: `single`,
+  COUPLE: `couple`,
+  TRIPLE: `triple`,
+};

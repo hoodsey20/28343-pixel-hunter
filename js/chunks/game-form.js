@@ -1,3 +1,5 @@
+import {questionTypes} from './../consts';
+
 import {gameFormTypeSingle, gameFormTypeSingleHandler} from './game-form-single';
 import {gameFormTypeCouple, gameFormTypeCoupleHandler} from './game-form-couple';
 import {gameFormTypeTriple, gameFormTypeTripleHandler} from './game-form-triple';
@@ -9,18 +11,20 @@ const gameForm = (type) => {
   let formHandler = null;
 
   switch (type) {
-    case `single`:
+    case questionTypes.SIGNLE:
       formElement = gameFormTypeSingle;
       formHandler = gameFormTypeSingleHandler;
       break;
-    case `couple`:
+    case questionTypes.COUPLE:
       formElement = gameFormTypeCouple;
       formHandler = gameFormTypeCoupleHandler;
       break;
-    case `triple`:
+    case questionTypes.TRIPLE:
       formElement = gameFormTypeTriple;
       formHandler = gameFormTypeTripleHandler;
       break;
+    default:
+      throw new Error(`Odd type of question: ${type}`);
   }
 
   gameInterface.form = formElement;
