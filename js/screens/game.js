@@ -22,10 +22,6 @@ export default class GameView extends AbstractView {
       </div>`;
   }
 
-  get gameState() {
-    return this._gameData;
-  }
-
   onAnswer() {
   }
 
