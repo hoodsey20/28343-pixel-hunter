@@ -49,7 +49,6 @@ const handleChangeGameScreen = (actualState) => {
 rulesScreen.onSubmit = (initState) => {
   const initQuestion = gameQuestions[initState.currentQuestion - 1];
   const gameScreen = new GameView(initState, initQuestion);
-  gameScreen.onBack = () => renderScreen(greetingScreen.element);
 
   gameScreen.onAnswer = handleChangeGameScreen;
 
