@@ -1,6 +1,6 @@
 import AbstractView from './../view/abstract';
+import HeaderView from './../view/header';
 
-import {headerTemplate} from './../chunks/header';
 import {footerTemplate} from './../chunks/footer';
 
 
@@ -11,7 +11,7 @@ export default class RulesView extends AbstractView {
   }
 
   get template() {
-    return `${headerTemplate()}
+    return `<header class="header">${new HeaderView().getHeaderBack}</header>
     <div class="rules">
       <h1 class="rules__title">Правила</h1>
       <p class="rules__description">Угадай 10 раз для каждого изображения фото <img
