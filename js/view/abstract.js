@@ -1,8 +1,4 @@
-const render = (html) => {
-  const wrapper = document.createElement(`div`);
-  wrapper.innerHTML = html.trim();
-  return wrapper;
-};
+import {render} from './../util';
 
 export default class AbstractView {
   constructor() {

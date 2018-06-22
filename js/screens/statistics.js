@@ -17,7 +17,7 @@ export default class StatisticsView extends AbstractView {
     const title = this._status ? `Победа!` : `Поражение :(`;
     const resultTemplate = this._status ? successResultTemplate : failResultTemplate;
 
-    return `${headerTemplate(this._gameData)}
+    return `${headerTemplate()}
     <div class="result">
       <h1>${title}</h1>
       ${resultTemplate(1, this._gameData.answers, this._gameData.lifes)}

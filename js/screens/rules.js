@@ -11,7 +11,7 @@ export default class RulesView extends AbstractView {
   }
 
   get template() {
-    return `${headerTemplate(this._gameData)}
+    return `${headerTemplate()}
     <div class="rules">
       <h1 class="rules__title">Правила</h1>
       <p class="rules__description">Угадай 10 раз для каждого изображения фото <img
