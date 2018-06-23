@@ -1,5 +1,5 @@
-import AbstractView from './../view/abstract';
-import HeaderView from './../view/header';
+import AbstractView from './abstract';
+import HeaderView from './header';
 
 import {footerTemplate} from './../chunks/footer';
 

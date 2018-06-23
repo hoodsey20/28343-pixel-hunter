@@ -1,5 +1,5 @@
 import {questionTypes} from './../consts';
-import AbstractView from './../view/abstract';
+import AbstractView from './abstract';
 
 import {statsTemplate} from './../chunks/stats';
 import {gameFormTypeSingle, gameFormTypeSingleHandler} from './../chunks/game-form-single';

@@ -1,8 +1,8 @@
-import IntroView from './screens/intro';
-import GreetingView from './screens/greeting';
-import RulesView from './screens/rules';
-import GameView from './screens/game';
-import StatisticsView from './screens/statistics';
+import IntroView from './view/intro';
+import GreetingView from './view/greeting';
+import RulesView from './view/rules';
+import GameView from './view/game';
+import StatisticsView from './view/statistics';
 
 import HeaderView from './view/header';
 
