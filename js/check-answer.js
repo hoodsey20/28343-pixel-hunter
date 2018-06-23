@@ -1,5 +1,6 @@
-export const checkAnswer = (question, answer) => {
+import {questionTypes} from './consts';
 
+export const checkAnswer = (question, answer) => {
   if (typeof question !== `object` || question === null) {
     throw new Error(`Question should be of type object and not null`);
   }
@@ -18,20 +19,20 @@ export const checkAnswer = (question, answer) => {
   let answerCheckResult = {status: false, time: defaultTime};
 
   switch (question.type) {
-    case `single`:
+    case questionTypes.SIGNLE:
       if (question.photos[0].source === answer.question1) {
         answerCheckResult = {status: true, time: defaultTime};
       }
       break;
 
-    case `couple`:
+    case questionTypes.COUPLE:
       if (question.photos[0].source === answer.question1 &&
         question.photos[1].source === answer.question2) {
         answerCheckResult = {status: true, time: defaultTime};
       }
       break;
 
-    case `triple`:
+    case questionTypes.TRIPLE:
       if (question.photos[answer.question1 - 1].source === `paint`) {
         answerCheckResult = {status: true, time: defaultTime};
       }
