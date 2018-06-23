@@ -1,9 +1,11 @@
 import AbstractView from './abstract';
+import {getInitialState} from './../data/game-data';
 
 export default class HeaderView extends AbstractView {
-  constructor(state) {
+  constructor(lifes, time) {
     super();
-    this._gameState = state;
+    this._lifes = lifes;
+    this._time = time;
   }
 
   get getHeaderBack() {
@@ -16,14 +18,17 @@ export default class HeaderView extends AbstractView {
   }
 
   getLives() {
-    if (this._gameState) {
-      const lifesToShow = this._gameState.lifes > -1 ? this._gameState.lifes : 0;
+    if (this._lifes || this._lifes === 0) {
+
+      const currentLifes = this._lifes > 0 ? this._lifes : 0;
+      const lostLifes = getInitialState().lifes - currentLifes;
+      const activeLifes = currentLifes;
 
       return `<div class="game__lives">
-        ${new Array(3 - lifesToShow)
+        ${new Array(lostLifes)
             .fill(`<img src="img/heart__empty.svg" class="game__heart" alt="Life" width="32" height="32">`)
             .join(``)}
-        ${new Array(lifesToShow)
+        ${new Array(activeLifes)
           .fill(`<img src="img/heart__full.svg" class="game__heart" alt="Life" width="32" height="32">`)
           .join(``)}
       </div>`;
@@ -32,8 +37,8 @@ export default class HeaderView extends AbstractView {
   }
 
   getTimer() {
-    if (this._gameState) {
-      return `<h1 class="game__timer">${this._gameState.timer}</h1>`;
+    if (this._time) {
+      return `<h1 class="game__timer">${this._time}</h1>`;
     }
     return ``;
   }

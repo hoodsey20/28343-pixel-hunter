@@ -23,7 +23,7 @@ const rulesSubmitHandler = (initState) => {
 
   gameScreen.onAnswer = handleChangeGameScreen;
 
-  const headerView = new HeaderView(initState);
+  const headerView = new HeaderView(initState.lifes, initState.timer);
   headerView.onBack = () => renderScreen(getRulesTemplate());
 
   const footerContainer = render(footerTemplate);
@@ -63,7 +63,7 @@ const handleChangeGameScreen = (actualState) => {
 
       const headerContainer = mainScreen.querySelector(`.header`).parentNode;
       const gameContainer = mainScreen.querySelector(`.game`).parentNode;
-      const headerView = new HeaderView(nextState);
+      const headerView = new HeaderView(nextState.lifes, nextState.timer);
 
       headerView.onBack = () => renderScreen(getRulesTemplate());
       updateView(headerContainer, headerView.element);
