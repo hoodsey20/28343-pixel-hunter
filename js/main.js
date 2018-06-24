@@ -17,7 +17,9 @@ const mainScreen = document.querySelector(`.central`);
 const introScreen = new IntroView();
 const greetingScreen = new GreetingView();
 
-const rulesSubmitHandler = (initState) => {
+const rulesSubmitHandler = () => {
+  const initState = getInitialState();
+  initState.currentQuestion++;
   const initQuestion = gameQuestions[initState.currentQuestion - 1];
   const gameScreen = new GameView(initState, initQuestion);
 
@@ -35,7 +37,7 @@ const rulesSubmitHandler = (initState) => {
 };
 
 const getRulesTemplate = () => {
-  const rulesScreen = new RulesView(getInitialState());
+  const rulesScreen = new RulesView();
   rulesScreen.onSubmit = rulesSubmitHandler;
   rulesScreen.onBack = () => renderScreen(greetingScreen.element);
   return rulesScreen.element;
