@@ -5,6 +5,12 @@ export const getInitialState = () => ({
   timer: 30,
 });
 
+export const tick = (state) => {
+  return Object.assign({}, state, {
+    timer: state.timer - 1
+  });
+};
+
 export const gameQuestions = [
   {
     number: 1,
