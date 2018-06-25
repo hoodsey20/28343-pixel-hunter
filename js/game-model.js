@@ -5,9 +5,10 @@ import {changeGameState} from './change-game-state';
 import {timerConditions} from './consts';
 
 class GameModel {
-  constructor(questions = gameQuestions, state = getInitialState()) {
+  constructor(name = `Unnamed`, questions = gameQuestions, state = getInitialState()) {
     this._state = state;
     this._questions = questions;
+    this._playerName = name;
   }
 
   get state() {
@@ -43,11 +44,14 @@ class GameModel {
   }
 
   isDead() {
-    return this._state.lifes <= 0;
+    return this._state.lifes < 0;
+  }
+
+  isEndReached() {
+    return this.currentQuestionNumber > this._questions.length;
   }
 
   tick() {
-    console.log(this._state);
     this._state = tick(this._state);
   }
 

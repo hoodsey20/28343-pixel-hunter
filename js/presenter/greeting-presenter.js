@@ -1,16 +1,11 @@
 import GreetingView from './../view/greeting';
+import Router from './../router';
 
 class GreetingPresenter {
   constructor() {
     this.content = new GreetingView();
-
-    this.root = document.querySelector(`.central`);
+    this.content.onClick = Router.showRules;
   }
-
-  set clickHandler(handler) {
-    this.content.onClick = handler;
-  }
-
 }
 
 export default GreetingPresenter;

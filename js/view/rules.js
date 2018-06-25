@@ -43,7 +43,7 @@ export default class RulesView extends AbstractView {
 
     rulesForm.addEventListener(`submit`, (evt) => {
       evt.preventDefault();
-      this.onSubmit();
+      this.onSubmit(evt.target.querySelector(`.rules__input`).value);
     });
 
     element.querySelector(`button.back`).addEventListener(`click`, () => {

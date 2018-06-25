@@ -1,12 +1,10 @@
 import IntroView from './../view/intro';
+import Router from './../router';
 
 class IntroPresenter {
   constructor() {
     this.content = new IntroView();
-  }
-
-  set clickHandler(handler) {
-    this.content.onClick = handler;
+    this.content.onClick = Router.showGreeting;
   }
 }
 

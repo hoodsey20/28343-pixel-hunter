@@ -1,20 +1,13 @@
 import RulesView from './../view/rules';
+import Router from './../router';
 
 class RulesPresenter {
   constructor() {
     this.content = new RulesView();
 
-    this.root = document.querySelector(`.central`);
+    this.content.onSubmit = Router.showGame;
+    this.content.onBack = Router.showGreeting;
   }
-
-  set submitHandler(handler) {
-    this.content.onSubmit = handler;
-  }
-
-  set backButtonHandler(handler) {
-    this.content.onBack = handler;
-  }
-
 }
 
 export default RulesPresenter;

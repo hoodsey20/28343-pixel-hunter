@@ -1,3 +1,4 @@
+import Router from './../router';
 import {render} from './../util';
 
 import GameView from './../view/game';
@@ -12,11 +13,14 @@ class GamePresenter {
     this.model = model;
     this.header = new HeaderView(this.model.lifes, this.model.timer);
     this.content = new GameView(this.model.state, this.model.currentQuestionData);
+    this.footer = render(footerTemplate);
 
     this.root = document.querySelector(`.central`);
 
     this.root.appendChild(this.header.element);
-    this.root.appendChild(render(footerTemplate));
+    this.content.onAnswer = this.answerHandler.bind(this);
+    this.root.appendChild(this.content.element);
+    this.root.appendChild(this.footer);
 
     this._interval = null;
   }
@@ -44,16 +48,19 @@ class GamePresenter {
 
   updateGameScreen() {
     this.stopGame();
-    this.model.refreshTimer();
-    this.updateHeader();
-    this.updateGameForm();
-    this.startGame();
+    if (this.model.isDead()) {
+      Router.showStatistics(this.model.state, false, this.model._playerName);
+    } else if (this.model.isEndReached()) {
+      Router.showStatistics(this.model.state, true, this.model._playerName);
+    } else {
+      this.model.refreshTimer();
+      this.updateHeader();
+      this.updateGameForm();
+      this.startGame();
+    }
   }
 
   startGame() {
-    this.content.onAnswer = this.answerHandler.bind(this);
-    this.root.appendChild(this.content.element);
-
     this._interval = setInterval(() => {
       this.model.tick();
       if (this.model.timer > 0) {

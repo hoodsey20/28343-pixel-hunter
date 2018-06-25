@@ -1,18 +1,19 @@
 import StatisticsView from './../view/statistics';
+import Router from './../router';
+
 
 class StatisticsPresenter {
-  constructor(state, status) {
+  constructor(state, status, playerName) {
     this._state = state;
     this._status = status;
+    this._playerName = playerName;
+
     this.content = new StatisticsView(this._state, this._status);
 
-    this.root = document.querySelector(`.central`);
+    this.content.onBack = () => {
+      return Router.showGame(this._playerName);
+    };
   }
-
-  set backButtonHandler(handler) {
-    this.content.onBack = handler;
-  }
-
 }
 
 export default StatisticsPresenter;
