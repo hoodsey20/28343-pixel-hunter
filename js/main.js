@@ -1,3 +1,6 @@
+import GamePresenter from './presenter/game-presenter';
+import GameModel from './game-model';
+
 import IntroView from './view/intro';
 import GreetingView from './view/greeting';
 import RulesView from './view/rules';
@@ -12,12 +15,49 @@ import {renderScreen, updateView, render} from './util';
 import {getInitialState, gameQuestions} from './data/game-data';
 import {checkAnswer} from './check-answer';
 import {changeGameState} from './change-game-state';
+import {createTimer} from './timer';
+import {timerConditions} from './consts';
+
+const ONE_SECOND = 1000;
+
+let appTimer = createTimer(timerConditions.MAX);
+
+const tick = () => {
+  appTimer = appTimer.tick();
+  console.log(appTimer.time);
+  return !!appTimer;
+};
+
+let timer;
+
+const startTimer = () => {
+  timer = setTimeout(() => {
+    if (tick()) {
+      startTimer();
+    } else {
+      console.log('таймер кончился');
+      stopTimer();
+    }
+  }, ONE_SECOND);
+};
+
+const stopTimer = () => {
+  clearTimeout(timer);
+};
+
 
 const mainScreen = document.querySelector(`.central`);
 const introScreen = new IntroView();
 const greetingScreen = new GreetingView();
 
 const rulesSubmitHandler = () => {
+  mainScreen.innerHTML = ``;
+  const gameModel = new GameModel();
+  gameModel.questionNumber = 1;
+  const gameScreen = new GamePresenter(gameModel);
+  gameScreen.startGame();
+
+  /*
   const initState = getInitialState();
   initState.currentQuestion++;
   const initQuestion = gameQuestions[initState.currentQuestion - 1];
@@ -34,6 +74,7 @@ const rulesSubmitHandler = () => {
   mainScreen.appendChild(headerView.element);
   mainScreen.appendChild(gameScreen.element);
   mainScreen.appendChild(footerContainer);
+  */
 };
 
 const getRulesTemplate = () => {
