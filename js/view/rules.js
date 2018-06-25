@@ -1,14 +1,10 @@
-import AbstractView from './../view/abstract';
-import HeaderView from './../view/header';
+import AbstractView from './abstract';
+import HeaderView from './header';
 
 import {footerTemplate} from './../chunks/footer';
 
 
 export default class RulesView extends AbstractView {
-  constructor(data) {
-    super();
-    this._gameData = data;
-  }
 
   get template() {
     return `<header class="header">${new HeaderView().getHeaderBack}</header>
@@ -47,8 +43,7 @@ export default class RulesView extends AbstractView {
 
     rulesForm.addEventListener(`submit`, (evt) => {
       evt.preventDefault();
-      this._gameData.currentQuestion = 1;
-      this.onSubmit(this._gameData);
+      this.onSubmit(evt.target.querySelector(`.rules__input`).value);
     });
 
     element.querySelector(`button.back`).addEventListener(`click`, () => {

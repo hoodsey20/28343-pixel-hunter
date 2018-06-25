@@ -1,6 +1,6 @@
-import AbstractView from './../view/abstract';
+import AbstractView from './abstract';
+import HeaderView from './header';
 
-import HeaderView from './../view/header';
 import {footerTemplate} from './../chunks/footer';
 import {successResultTemplate} from './../chunks/success-result';
 import {failResultTemplate} from './../chunks/fail-result';

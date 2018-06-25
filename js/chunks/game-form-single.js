@@ -16,7 +16,8 @@ export const gameFormTypeSingle = (questionData) => {
   return content;
 };
 
-export const gameFormTypeSingleHandler = (node, answer, callback) => {
+export const gameFormTypeSingleHandler = (node, callback) => {
+  const answer = {};
   const form = node.querySelector(`.game__content`);
   form.querySelectorAll(`[type="radio"]`).forEach((radio) => {
     radio.addEventListener(`change`, () => {

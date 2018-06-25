@@ -1,6 +1,6 @@
 import {questionTypes} from './consts';
 
-export const checkAnswer = (question, answer) => {
+export const checkAnswer = (question, answer, answerTime) => {
   if (typeof question !== `object` || question === null) {
     throw new Error(`Question should be of type object and not null`);
   }
@@ -13,28 +13,25 @@ export const checkAnswer = (question, answer) => {
     throw new Error(`Numbers of question and answer should be equal`);
   }
 
-  // пока нет реализации таймера, делаем имитацию
-  const defaultTime = Math.random() * (30 - 1) + 1;
-
-  let answerCheckResult = {status: false, time: defaultTime};
+  let answerCheckResult = {status: false, time: answerTime};
 
   switch (question.type) {
     case questionTypes.SIGNLE:
       if (question.photos[0].source === answer.question1) {
-        answerCheckResult = {status: true, time: defaultTime};
+        answerCheckResult.status = true;
       }
       break;
 
     case questionTypes.COUPLE:
       if (question.photos[0].source === answer.question1 &&
         question.photos[1].source === answer.question2) {
-        answerCheckResult = {status: true, time: defaultTime};
+        answerCheckResult.status = true;
       }
       break;
 
     case questionTypes.TRIPLE:
       if (question.photos[answer.question1 - 1].source === `paint`) {
-        answerCheckResult = {status: true, time: defaultTime};
+        answerCheckResult.status = true;
       }
       break;
   }

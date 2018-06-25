@@ -1,5 +1,5 @@
 import {questionTypes} from './../consts';
-import AbstractView from './../view/abstract';
+import AbstractView from './abstract';
 
 import {statsTemplate} from './../chunks/stats';
 import {gameFormTypeSingle, gameFormTypeSingleHandler} from './../chunks/game-form-single';
@@ -60,8 +60,7 @@ export default class GameView extends AbstractView {
 
     getQuestionFormAndHandler(this._question.type).handler(
         element,
-        {number: this._gameData.currentQuestion},
-        this.onAnswer(this._gameData)
+        this.onAnswer
     );
 
   }

@@ -8,8 +8,9 @@ export const gameFormTypeTriple = (questionData) => {
   return content;
 };
 
-export const gameFormTypeTripleHandler = (node, answer, callback) => {
+export const gameFormTypeTripleHandler = (node, callback) => {
   const form = node.querySelector(`.game__content`);
+  const answer = {};
 
   form.querySelectorAll(`.game__option`).forEach((option) => {
     option.addEventListener(`click`, function (evt) {
