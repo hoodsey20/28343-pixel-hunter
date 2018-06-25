@@ -16,8 +16,9 @@ export const gameFormTypeCouple = (questionData) => {
   return content;
 };
 
-export const gameFormTypeCoupleHandler = (node, answer, callback) => {
+export const gameFormTypeCoupleHandler = (node, callback) => {
   const form = node.querySelector(`.game__content`);
+  const answer = {};
 
   const radioChangeHandler = () => {
     if (form.querySelector(`[name="question1"]:checked`) && form.querySelector(`[name="question2"]:checked`)) {

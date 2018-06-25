@@ -60,8 +60,7 @@ export default class GameView extends AbstractView {
 
     getQuestionFormAndHandler(this._question.type).handler(
         element,
-        {number: this._gameData.currentQuestion},
-        this.onAnswer(this._gameData)
+        this.onAnswer
     );
 
   }
