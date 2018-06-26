@@ -30,7 +30,11 @@ export const checkAnswer = (question, answer, answerTime) => {
       break;
 
     case questionTypes.TRIPLE:
-      if (question.photos[answer.question1 - 1].source === `paint`) {
+      const photos = question.photos;
+      const guessedUniqueType = question.photos[answer.question1 - 1].source;
+      const picsWithSelectedType = photos.filter((photo) => photo.source === guessedUniqueType);
+
+      if (picsWithSelectedType.length === 1) {
         answerCheckResult.status = true;
       }
       break;
