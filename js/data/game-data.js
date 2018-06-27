@@ -1,3 +1,9 @@
+export const questionTypes = {
+  SINGLE: `single`,
+  COUPLE: `couple`,
+  TRIPLE: `triple`
+};
+
 export const getInitialState = () => ({
   currentQuestion: 0,
   lifes: 3,
@@ -14,7 +20,7 @@ export const tick = (state) => {
 export const gameQuestions = [
   {
     number: 1,
-    type: `couple`,
+    type: questionTypes.COUPLE,
     title: `Угадайте для каждого изображения фото или рисунок?`,
     photos: [
       {
@@ -29,7 +35,7 @@ export const gameQuestions = [
   },
   {
     number: 2,
-    type: `single`,
+    type: questionTypes.SINGLE,
     title: `Угадай, фото или рисунок?`,
     photos: [
       {
@@ -40,7 +46,7 @@ export const gameQuestions = [
   },
   {
     number: 3,
-    type: `triple`,
+    type: questionTypes.TRIPLE,
     title: `Найдите рисунок среди изображений`,
     photos: [
       {
@@ -59,7 +65,7 @@ export const gameQuestions = [
   },
   {
     number: 4,
-    type: `couple`,
+    type: questionTypes.COUPLE,
     title: `Угадайте для каждого изображения фото или рисунок?`,
     photos: [
       {
@@ -74,7 +80,7 @@ export const gameQuestions = [
   },
   {
     number: 5,
-    type: `single`,
+    type: questionTypes.SINGLE,
     title: `Угадай, фото или рисунок?`,
     photos: [
       {
@@ -85,7 +91,7 @@ export const gameQuestions = [
   },
   {
     number: 6,
-    type: `triple`,
+    type: questionTypes.TRIPLE,
     title: `Найдите рисунок среди изображений`,
     photos: [
       {
@@ -104,7 +110,7 @@ export const gameQuestions = [
   },
   {
     number: 7,
-    type: `couple`,
+    type: questionTypes.COUPLE,
     title: `Угадайте для каждого изображения фото или рисунок?`,
     photos: [
       {
@@ -119,7 +125,7 @@ export const gameQuestions = [
   },
   {
     number: 8,
-    type: `single`,
+    type: questionTypes.SINGLE,
     title: `Угадай, фото или рисунок?`,
     photos: [
       {
@@ -130,7 +136,7 @@ export const gameQuestions = [
   },
   {
     number: 9,
-    type: `triple`,
+    type: questionTypes.TRIPLE,
     title: `Найдите рисунок среди изображений`,
     photos: [
       {
@@ -149,7 +155,7 @@ export const gameQuestions = [
   },
   {
     number: 10,
-    type: `couple`,
+    type: questionTypes.COUPLE,
     title: `Угадайте для каждого изображения фото или рисунок?`,
     photos: [
       {
