@@ -65,7 +65,17 @@ export default class Router {
   }
 
   static showStatistics(state, status, playerName) {
-    const statScreen = new StatisticsPresenter(state, status, playerName);
-    changeView(statScreen.content.element);
+    const data = {
+      status,
+      history: state,
+    };
+
+    Api.saveResults(playerName, data)
+      .then(() => Api.loadResults(playerName))
+      .then((result) => {
+        const statScreen = new StatisticsPresenter(result);
+        changeView(statScreen.content.element);
+      })
+      .catch((err) => this.showError(err));
   }
 }

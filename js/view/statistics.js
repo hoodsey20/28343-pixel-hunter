@@ -7,21 +7,29 @@ import {failResultTemplate} from './../chunks/fail-result';
 
 
 export default class StatisticsView extends AbstractView {
-  constructor(data, status) {
+  constructor(data) {
     super();
     this._gameData = data;
-    this._status = status;
+  }
+
+  getResultsTemplate(data) {
+    return data.reverse().map((dataItem, index) => {
+      const title = dataItem.status ? `Победа!` : `Поражение :(`;
+      const templateToUse = dataItem.status ? successResultTemplate : failResultTemplate;
+      const {answers, lifes} = dataItem.history;
+      const titleTemplate = index === 0 ? `<h1>${title}</h1>` : ``;
+
+      return `<div class="result">
+        ${titleTemplate}
+        ${templateToUse(index + 1, answers, lifes)}
+      </div>`;
+    }).join(``);
   }
 
   get template() {
-    const title = this._status ? `Победа!` : `Поражение :(`;
-    const resultTemplate = this._status ? successResultTemplate : failResultTemplate;
-
     return `<header class="header">${new HeaderView().getHeaderBack}</header>
-    <div class="result">
-      <h1>${title}</h1>
-      ${resultTemplate(1, this._gameData.answers, this._gameData.lifes)}
-    </div>${footerTemplate}`;
+    ${this.getResultsTemplate(this._gameData)}
+    ${footerTemplate}`;
   }
 
   onBack() {
