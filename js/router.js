@@ -4,6 +4,7 @@ import RulesPresenter from './presenter/rules-presenter';
 import GamePresenter from './presenter/game-presenter';
 import StatisticsPresenter from './presenter/statistics-presenter';
 import ModalErrorView from './view/modal-error';
+import ModalConfirmView from './view/modal-confirm';
 
 import GameModel from './game-model';
 import {dataAdapter} from './data-adapter';
@@ -49,6 +50,16 @@ export default class Router {
   static showGreeting() {
     const greetingScreen = new GreetingPresenter();
     changeView(greetingScreen.content.element);
+  }
+
+  static showDialog(onSubmitHandler) {
+    const confirmScreen = new ModalConfirmView();
+    const modalNode = confirmScreen.element;
+    confirmScreen.onClose = confirmScreen.onCancel = () => {
+      rootNode.removeChild(modalNode);
+    };
+    confirmScreen.onSubmit = onSubmitHandler;
+    rootNode.appendChild(modalNode);
   }
 
   static showRules() {

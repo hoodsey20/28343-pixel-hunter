@@ -26,15 +26,18 @@ export default class ModalConfirmView extends AbstractView {
   }
 
   bind(element) {
-    element.querySelector(`.modal-confirm__close`).addEventListener(`click`, () => {
+    element.querySelector(`.modal-confirm__close`).addEventListener(`click`, (evt) => {
+      evt.preventDefault();
       this.onClose();
     });
 
-    element.querySelector(`.js-submit`).addEventListener(`click`, () => {
+    element.querySelector(`.js-submit`).addEventListener(`click`, (evt) => {
+      evt.preventDefault();
       this.onSubmit();
     });
 
-    element.querySelector(`.js-cancel`).addEventListener(`click`, () => {
+    element.querySelector(`.js-cancel`).addEventListener(`click`, (evt) => {
+      evt.preventDefault();
       this.onCancel();
     });
   }
