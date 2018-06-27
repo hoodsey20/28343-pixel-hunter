@@ -7,7 +7,8 @@ import ModalErrorView from './view/modal-error';
 import ModalConfirmView from './view/modal-confirm';
 
 import GameModel from './game-model';
-import {dataAdapter} from './data-adapter';
+
+import Api from './api';
 
 const rootNode = document.querySelector(`.central`);
 
@@ -16,27 +17,15 @@ const changeView = (element) => {
   rootNode.appendChild(element);
 };
 
-const QUESTIONS_URL = `https://es.dump.academy/pixel-hunter/questions`;
-
-const checkStatus = (response) => {
-  if (response.status >= 200 && response.status < 300) {
-    return response;
-  } else {
-    throw new Error(`${response.status}: ${response.statusText}`);
-  }
-};
-
 let gameQuestionsData = null;
 
 export default class Router {
   static showIntro() {
     const introScreen = new IntroPresenter();
     changeView(introScreen.content.element);
-    window.fetch(QUESTIONS_URL)
-      .then(checkStatus)
-      .then((response) => response.json())
+    Api.loadData()
       .then((data) => {
-        gameQuestionsData = dataAdapter(data, true);
+        gameQuestionsData = data;
         return gameQuestionsData;
       })
       .then(() => this.showGreeting())
