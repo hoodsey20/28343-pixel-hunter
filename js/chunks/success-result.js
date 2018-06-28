@@ -1,4 +1,4 @@
-import {answerStatus} from './../consts';
+import {AnswerStatus} from './../consts';
 import {getAnswerStatus} from './../get-answer-status';
 import {statsTemplate} from './stats';
 import {getFinalPoints} from './../get-final-points';
@@ -45,15 +45,15 @@ export const successResultTemplate = (number, answers, lifes) => {
   for (let item of answers) {
     const status = getAnswerStatus(item);
 
-    if (status !== answerStatus.WRONG) {
+    if (status !== AnswerStatus.WRONG) {
       rightAnswersLength++;
     }
 
-    if (status === answerStatus.FAST) {
+    if (status === AnswerStatus.FAST) {
       fastAnswersLength++;
     }
 
-    if (status === answerStatus.SLOW) {
+    if (status === AnswerStatus.SLOW) {
       slowAnswersLength++;
     }
   }

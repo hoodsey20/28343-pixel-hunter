@@ -1,9 +1,10 @@
-import {questionTypes} from './data/game-data';
+import {QuestionType} from './consts';
+
 
 const Server2ResultMapper = {
-  'tinder-like': questionTypes.SINGLE,
-  'two-of-two': questionTypes.COUPLE,
-  'one-of-three': questionTypes.TRIPLE,
+  'tinder-like': QuestionType.SINGLE,
+  'two-of-two': QuestionType.COUPLE,
+  'one-of-three': QuestionType.TRIPLE,
 };
 
 export const dataAdapter = (data, numbering) => {

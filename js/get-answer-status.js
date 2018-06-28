@@ -1,4 +1,4 @@
-import {answerStatus, timerConditions} from './consts';
+import {AnswerStatus, TimerCondition} from './consts';
 
 export const getAnswerStatus = (answer) => {
 
@@ -12,16 +12,16 @@ export const getAnswerStatus = (answer) => {
 
   let status;
 
-  if (answer.status === false || answer.time > timerConditions.MAX) {
-    return answerStatus.WRONG;
+  if (answer.status === false || answer.time > TimerCondition.MAX) {
+    return AnswerStatus.WRONG;
   }
 
-  if (answer.time < timerConditions.FAST) {
-    status = answerStatus.FAST;
-  } else if (answer.time > timerConditions.SLOW) {
-    status = answerStatus.SLOW;
+  if (answer.time < TimerCondition.FAST) {
+    status = AnswerStatus.FAST;
+  } else if (answer.time > TimerCondition.SLOW) {
+    status = AnswerStatus.SLOW;
   } else {
-    status = answerStatus.CORRECT;
+    status = AnswerStatus.CORRECT;
   }
 
   return status;

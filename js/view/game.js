@@ -1,4 +1,4 @@
-import {questionTypes} from './../consts';
+import {QuestionType} from './../consts';
 import AbstractView from './abstract';
 
 import {statsTemplate} from './../chunks/stats';
@@ -13,15 +13,15 @@ const getQuestionFormAndHandler = (type) => {
   let formHandler = null;
 
   switch (type) {
-    case questionTypes.SIGNLE:
+    case QuestionType.SINGLE:
       formElement = gameFormTypeSingle;
       formHandler = gameFormTypeSingleHandler;
       break;
-    case questionTypes.COUPLE:
+    case QuestionType.COUPLE:
       formElement = gameFormTypeCouple;
       formHandler = gameFormTypeCoupleHandler;
       break;
-    case questionTypes.TRIPLE:
+    case QuestionType.TRIPLE:
       formElement = gameFormTypeTriple;
       formHandler = gameFormTypeTripleHandler;
       break;

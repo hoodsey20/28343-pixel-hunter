@@ -1,18 +1,18 @@
-import {answerStatus} from './../consts';
+import {AnswerStatus} from './../consts';
 import {getAnswerStatus} from './../get-answer-status';
 
 export const statsTemplate = (answers) => {
 
   const modificators = new Map();
-  modificators.set(answerStatus.UNKNOWN, `unknown`);
-  modificators.set(answerStatus.WRONG, `wrong`);
-  modificators.set(answerStatus.SLOW, `slow`);
-  modificators.set(answerStatus.FAST, `fast`);
-  modificators.set(answerStatus.CORRECT, `correct`);
+  modificators.set(AnswerStatus.UNKNOWN, `unknown`);
+  modificators.set(AnswerStatus.WRONG, `wrong`);
+  modificators.set(AnswerStatus.SLOW, `slow`);
+  modificators.set(AnswerStatus.FAST, `fast`);
+  modificators.set(AnswerStatus.CORRECT, `correct`);
 
   const answersWithStatus = answers.map((item) => getAnswerStatus(item));
 
-  const currentAnswers = answersWithStatus.concat(new Array(10 - answers.length).fill(answerStatus.UNKNOWN));
+  const currentAnswers = answersWithStatus.concat(new Array(10 - answers.length).fill(AnswerStatus.UNKNOWN));
 
   let content = `<ul class="stats">`;
 

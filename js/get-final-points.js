@@ -1,21 +1,17 @@
-import {answerStatus} from './consts';
+import {AnswerStatus, GameCondition} from './consts';
 import {getAnswerStatus} from './get-answer-status';
 
-export const mainConditions = {
-  QUESTIONS: 10,
-  LIFES: 3,
-};
 
 const points = new Map();
 points.set(`LIFE`, 50);
-points.set(answerStatus.WRONG, 0);
-points.set(answerStatus.SLOW, 50);
-points.set(answerStatus.CORRECT, 100);
-points.set(answerStatus.FAST, 150);
+points.set(AnswerStatus.WRONG, 0);
+points.set(AnswerStatus.SLOW, 50);
+points.set(AnswerStatus.CORRECT, 100);
+points.set(AnswerStatus.FAST, 150);
 
 
 export const getFinalPoints = (answers, lives) => {
-  if (answers.length < mainConditions.QUESTIONS) {
+  if (answers.length < GameCondition.QUESTIONS) {
     return -1;
   }
 

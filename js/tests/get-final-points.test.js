@@ -1,10 +1,10 @@
 import {assert} from 'chai';
-import {getFinalPoints, mainConditions} from './../get-final-points.js';
-import {timerConditions} from './../consts';
+import {getFinalPoints} from './../get-final-points.js';
+import {TimerCondition, GameCondition} from './../consts';
 import {mockAnswersOne} from './get-final-points.data.js';
 
-const defaultAnswers = Array.from(Array(mainConditions.QUESTIONS)).map(() => (
-  {status: true, time: timerConditions.FAST}
+const defaultAnswers = Array.from(Array(GameCondition.QUESTIONS)).map(() => (
+  {status: true, time: TimerCondition.FAST}
 ));
 
 
@@ -25,42 +25,42 @@ describe(`getFinalPoints`, () => {
   });
 
   it(`should return 1150 when the all answers correct with normal time and all lives saved`, () => {
-    assert.equal(getFinalPoints(defaultAnswers, mainConditions.LIFES), 1150);
+    assert.equal(getFinalPoints(defaultAnswers, GameCondition.LIFES), 1150);
   });
 
   it(`should return 0 when the all answers incorrect and 0 lives saved`, () => {
     assert.equal(getFinalPoints(
-        defaultAnswers.map(() => ({status: false, time: timerConditions.SLOW + 1})),
+        defaultAnswers.map(() => ({status: false, time: TimerCondition.SLOW + 1})),
         0
     ), 0);
   });
 
   it(`should return 650 when the all answers correct with slow time and all lives saved`, () => {
     assert.equal(getFinalPoints(
-        defaultAnswers.map(() => ({status: true, time: timerConditions.SLOW + 1})),
-        mainConditions.LIFES
+        defaultAnswers.map(() => ({status: true, time: TimerCondition.SLOW + 1})),
+        GameCondition.LIFES
     ), 650);
   });
 
   it(`should return 1650 when the all answers correct with quick time and all lives saved`, () => {
     assert.equal(getFinalPoints(
-        defaultAnswers.map(() => ({status: true, time: timerConditions.FAST - 1})),
-        mainConditions.LIFES
+        defaultAnswers.map(() => ({status: true, time: TimerCondition.FAST - 1})),
+        GameCondition.LIFES
     ), 1650);
   });
 
   it(`should return 650 when the 5 answers correct with normal time and all lives saved`, () => {
     assert.equal(getFinalPoints(
         defaultAnswers.map((item, index) =>
-          ({status: index > 4, time: timerConditions.FAST})),
-        mainConditions.LIFES
+          ({status: index > 4, time: TimerCondition.FAST})),
+        GameCondition.LIFES
     ), 650);
   });
 
   it(`should return 500 when the 5 answers correct with normal time and 0 lives saved`, () => {
     assert.equal(getFinalPoints(
         defaultAnswers.map((item, index) =>
-          ({status: index < 5, time: timerConditions.FAST})),
+          ({status: index < 5, time: TimerCondition.FAST})),
         0
     ), 500);
   });
@@ -68,7 +68,7 @@ describe(`getFinalPoints`, () => {
   it(`should return 300 when the 3 answers correct with normal time and 0 lives saved`, () => {
     assert.equal(getFinalPoints(
         defaultAnswers.map((item, index) =>
-          ({status: index < 3, time: timerConditions.FAST})),
+          ({status: index < 3, time: TimerCondition.FAST})),
         0
     ), 300);
   });

@@ -2,7 +2,7 @@ import {getInitialState, gameQuestions, tick} from './data/game-data';
 import {checkAnswer} from './check-answer';
 import {changeGameState} from './change-game-state';
 
-import {timerConditions} from './consts';
+import {TimerCondition} from './consts';
 
 class GameModel {
   constructor(name = `Unnamed`, questions = gameQuestions, state = getInitialState()) {
@@ -40,7 +40,7 @@ class GameModel {
   }
 
   refreshTimer() {
-    this._state.timer = timerConditions.MAX;
+    this._state.timer = TimerCondition.MAX;
   }
 
   isDead() {
@@ -56,7 +56,7 @@ class GameModel {
   }
 
   updateStateByAnswer(answer) {
-    const answerResult = checkAnswer(this.currentQuestionData, answer, timerConditions.MAX - this._state.timer);
+    const answerResult = checkAnswer(this.currentQuestionData, answer, TimerCondition.MAX - this._state.timer);
     this._state = changeGameState(this._state, answerResult);
   }
 

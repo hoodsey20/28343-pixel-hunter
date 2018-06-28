@@ -1,4 +1,4 @@
-import {questionTypes} from './consts';
+import {QuestionType} from './consts';
 
 export const checkAnswer = (question, answer, answerTime) => {
   if (typeof question !== `object` || question === null) {
@@ -16,20 +16,20 @@ export const checkAnswer = (question, answer, answerTime) => {
   let answerCheckResult = {status: false, time: answerTime};
 
   switch (question.type) {
-    case questionTypes.SIGNLE:
+    case QuestionType.SINGLE:
       if (question.photos[0].source === answer.question1) {
         answerCheckResult.status = true;
       }
       break;
 
-    case questionTypes.COUPLE:
+    case QuestionType.COUPLE:
       if (question.photos[0].source === answer.question1 &&
         question.photos[1].source === answer.question2) {
         answerCheckResult.status = true;
       }
       break;
 
-    case questionTypes.TRIPLE:
+    case QuestionType.TRIPLE:
       const photos = question.photos;
       const guessedUniqueType = question.photos[answer.question1 - 1].source;
       const picsWithSelectedType = photos.filter((photo) => photo.source === guessedUniqueType);
