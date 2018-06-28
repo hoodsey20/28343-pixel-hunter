@@ -3,14 +3,13 @@ import Router from './../router';
 
 
 class StatisticsPresenter {
-  constructor(state, status) {
-    this._state = state;
-    this._status = status;
+  constructor(data) {
+    this._data = data;
 
-    this.content = new StatisticsView(this._state, this._status);
+    this.content = new StatisticsView(this._data);
 
     this.content.onBack = () => {
-      return Router.showGreeting();
+      Router.showGreeting();
     };
   }
 }

@@ -4,9 +4,11 @@ import RulesPresenter from './presenter/rules-presenter';
 import GamePresenter from './presenter/game-presenter';
 import StatisticsPresenter from './presenter/statistics-presenter';
 import ModalErrorView from './view/modal-error';
+import ModalConfirmView from './view/modal-confirm';
 
 import GameModel from './game-model';
-import {dataAdapter} from './data-adapter';
+
+import Api from './api';
 
 const rootNode = document.querySelector(`.central`);
 
@@ -15,27 +17,15 @@ const changeView = (element) => {
   rootNode.appendChild(element);
 };
 
-const QUESTIONS_URL = `https://es.dump.academy/pixel-hunter/questions`;
-
-const checkStatus = (response) => {
-  if (response.status >= 200 && response.status < 300) {
-    return response;
-  } else {
-    throw new Error(`${response.status}: ${response.statusText}`);
-  }
-};
-
 let gameQuestionsData = null;
 
 export default class Router {
   static showIntro() {
     const introScreen = new IntroPresenter();
     changeView(introScreen.content.element);
-    window.fetch(QUESTIONS_URL)
-      .then(checkStatus)
-      .then((response) => response.json())
+    Api.loadData()
       .then((data) => {
-        gameQuestionsData = dataAdapter(data, true);
+        gameQuestionsData = data;
         return gameQuestionsData;
       })
       .then(() => this.showGreeting())
@@ -49,6 +39,16 @@ export default class Router {
   static showGreeting() {
     const greetingScreen = new GreetingPresenter();
     changeView(greetingScreen.content.element);
+  }
+
+  static showDialog(onSubmitHandler) {
+    const confirmScreen = new ModalConfirmView();
+    const modalNode = confirmScreen.element;
+    confirmScreen.onClose = confirmScreen.onCancel = () => {
+      rootNode.removeChild(modalNode);
+    };
+    confirmScreen.onSubmit = onSubmitHandler;
+    rootNode.appendChild(modalNode);
   }
 
   static showRules() {
@@ -65,7 +65,17 @@ export default class Router {
   }
 
   static showStatistics(state, status, playerName) {
-    const statScreen = new StatisticsPresenter(state, status, playerName);
-    changeView(statScreen.content.element);
+    const data = {
+      status,
+      history: state,
+    };
+
+    Api.saveResults(playerName, data)
+      .then(() => Api.loadResults(playerName))
+      .then((result) => {
+        const statScreen = new StatisticsPresenter(result);
+        changeView(statScreen.content.element);
+      })
+      .catch((err) => this.showError(err));
   }
 }

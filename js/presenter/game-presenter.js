@@ -33,6 +33,13 @@ class GamePresenter {
 
   updateHeader() {
     const header = new HeaderView(this.model.lifes, this.model.timer);
+    const onBackSubmitHandler = () => {
+      this.stopGame();
+      Router.showGreeting();
+    };
+    header.onBack = () => {
+      Router.showDialog(onBackSubmitHandler.bind(this));
+    };
     this.root.replaceChild(header.element, this.header.element);
     this.header = header;
   }
