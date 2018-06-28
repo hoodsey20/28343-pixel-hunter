@@ -10,3 +10,18 @@
 
   padding-top: 20px;
 }
+
+.game__timer_effect_blink {
+  animation: blink-animation .5s steps(5, start) infinite;
+}
+
+@keyframes blink-animation {
+  to {
+    visibility: hidden;
+  }
+}
+@-webkit-keyframes blink-animation {
+  to {
+    visibility: hidden;
+  }
+}

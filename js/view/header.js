@@ -38,7 +38,11 @@ export default class HeaderView extends AbstractView {
 
   getTimer() {
     if (this._time) {
-      return `<h1 class="game__timer">${this._time}</h1>`;
+      let modificator = ``;
+      if (this._time <= 5) {
+        modificator = `game__timer_effect_blink`;
+      }
+      return `<h1 class="game__timer ${modificator}">${this._time}</h1>`;
     }
     return ``;
   }
