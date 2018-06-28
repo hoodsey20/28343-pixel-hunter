@@ -16,10 +16,10 @@ export const getFinalPoints = (answers, lives) => {
 
   let result = 0;
 
-  answers.forEach((answer) => {
+  for (const answer of answers) {
     const currentStatus = getAnswerStatus(answer);
     result += PointValue.get(currentStatus);
-  });
+  }
 
   result += lives * PointValue.get(`LIFE`);
 

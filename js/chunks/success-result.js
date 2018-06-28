@@ -40,7 +40,7 @@ export const successResultTemplate = (number, answers, lifes) => {
   let fastAnswersLength = 0;
   let slowAnswersLength = 0;
 
-  for (let item of answers) {
+  for (const item of answers) {
     const status = getAnswerStatus(item);
 
     if (status !== AnswerStatus.WRONG) {

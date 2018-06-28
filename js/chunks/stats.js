@@ -16,7 +16,7 @@ export const statsTemplate = (answers) => {
 
   let content = `<ul class="stats">`;
 
-  for (let item of currentAnswers) {
+  for (const item of currentAnswers) {
     content += `<li class="stats__result  stats__result--${ modificators.get(item) }"></li>`;
   }
 
