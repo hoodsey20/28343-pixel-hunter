@@ -1,4 +1,5 @@
-import {dataAdapter} from './data-adapter';
+import {getAdaptedQuestions} from './get-adapted-questions';
+
 
 const DATA_URL = `https://es.dump.academy/pixel-hunter/`;
 const APP_ID = `28343`;
@@ -20,7 +21,7 @@ export default class Api {
     .then(checkStatus)
     .then(toJSON)
     .then((data) => {
-      return dataAdapter(data, true);
+      return getAdaptedQuestions(data, true);
     });
   }
 

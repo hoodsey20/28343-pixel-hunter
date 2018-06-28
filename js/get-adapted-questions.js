@@ -7,7 +7,7 @@ const Server2ResultMapper = {
   'one-of-three': QuestionType.TRIPLE,
 };
 
-export const dataAdapter = (data, numbering) => {
+export const getAdaptedQuestions = (data, numbering) => {
   const preprocessed = data.map((serverQuestion, index) => {
     const preprocessedQuestion = {
       title: serverQuestion.question,
