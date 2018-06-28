@@ -2,9 +2,10 @@ import {dataAdapter} from './data-adapter';
 
 const DATA_URL = `https://es.dump.academy/pixel-hunter/`;
 const APP_ID = `28343`;
+const SUCCESS_CODE = 200;
 
 const checkStatus = (response) => {
-  if (response.status >= 200 && response.status < 300) {
+  if (response.status === SUCCESS_CODE) {
     return response;
   } else {
     throw new Error(`${response.status}: ${response.statusText}`);
