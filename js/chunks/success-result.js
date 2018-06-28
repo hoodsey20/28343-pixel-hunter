@@ -1,4 +1,4 @@
-import {AnswerStatus} from './../consts';
+import {AnswerStatus, PointValue} from './../consts';
 import {getAnswerStatus} from './../get-answer-status';
 import {statsTemplate} from './stats';
 import {getFinalPoints} from './../get-final-points';
@@ -7,35 +7,33 @@ export const successResultTemplate = (number, answers, lifes) => {
 
   const result = getFinalPoints(answers, lifes);
 
-  const points = {
-    ANSWER: 100,
-    FAST: 50,
-    LIFE: 50,
-    SLOW: 50,
-  };
+  const correctAnswerPoints = PointValue.get(AnswerStatus.CORRECT);
+  const lifePoints = PointValue.get(`LIFE`);
+  const fastAnswerImpact = PointValue.get(AnswerStatus.FAST) - correctAnswerPoints;
+  const slowAnswerImpact = Math.abs(PointValue.get(AnswerStatus.SLOW) - correctAnswerPoints);
 
-  const fastBonus = (length) => `<tr>
+  const getFastBonusTemplate = (length) => `<tr>
     <td></td>
     <td class="result__extra">Бонус за скорость:</td>
     <td class="result__extra">${length}&nbsp;<span class="stats__result stats__result--fast"></span></td>
-    <td class="result__points">×&nbsp;${points.FAST}</td>
-    <td class="result__total">${length * points.FAST}</td>
+    <td class="result__points">×&nbsp;${fastAnswerImpact}</td>
+    <td class="result__total">${length * fastAnswerImpact}</td>
   </tr>`;
 
-  const lifeBonus = (length) => `<tr>
+  const getLifeBonusTemplate = (length) => `<tr>
     <td></td>
     <td class="result__extra">Бонус за жизни:</td>
     <td class="result__extra">${length}&nbsp;<span class="stats__result stats__result--alive"></span></td>
-    <td class="result__points">×&nbsp;${points.LIFE}</td>
-    <td class="result__total">${length * points.LIFE}</td>
+    <td class="result__points">×&nbsp;${lifePoints}</td>
+    <td class="result__total">${length * lifePoints}</td>
   </tr>`;
 
-  const slowPenalty = (length) => `<tr>
+  const getSlowPenaltyTemplate = (length) => `<tr>
     <td></td>
     <td class="result__extra">Штраф за медлительность:</td>
     <td class="result__extra">${length}&nbsp;<span class="stats__result stats__result--slow"></span></td>
-    <td class="result__points">×&nbsp;${points.SLOW}</td>
-    <td class="result__total">-${length * points.SLOW}</td>
+    <td class="result__points">×&nbsp;${slowAnswerImpact}</td>
+    <td class="result__total">-${length * slowAnswerImpact}</td>
   </tr>`;
 
   let rightAnswersLength = 0;
@@ -64,19 +62,19 @@ export const successResultTemplate = (number, answers, lifes) => {
       <td colspan="2">
         ${statsTemplate(answers)}
       </td>
-      <td class="result__points">×&nbsp;${points.ANSWER}</td>
-      <td class="result__total">${rightAnswersLength * points.ANSWER}</td>`;
+      <td class="result__points">×&nbsp;${correctAnswerPoints}</td>
+      <td class="result__total">${rightAnswersLength * correctAnswerPoints}</td>`;
 
   if (fastAnswersLength) {
-    content += fastBonus(fastAnswersLength);
+    content += getFastBonusTemplate(fastAnswersLength);
   }
 
   if (lifes) {
-    content += lifeBonus(lifes);
+    content += getLifeBonusTemplate(lifes);
   }
 
   if (slowAnswersLength) {
-    content += slowPenalty(slowAnswersLength);
+    content += getSlowPenaltyTemplate(slowAnswersLength);
   }
 
   content += `<tr>

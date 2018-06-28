@@ -1,14 +1,5 @@
-import {AnswerStatus, GameCondition} from './consts';
+import {PointValue, GameCondition} from './consts';
 import {getAnswerStatus} from './get-answer-status';
-
-
-const points = new Map();
-points.set(`LIFE`, 50);
-points.set(AnswerStatus.WRONG, 0);
-points.set(AnswerStatus.SLOW, 50);
-points.set(AnswerStatus.CORRECT, 100);
-points.set(AnswerStatus.FAST, 150);
-
 
 export const getFinalPoints = (answers, lives) => {
   if (answers.length < GameCondition.QUESTIONS) {
@@ -27,10 +18,10 @@ export const getFinalPoints = (answers, lives) => {
 
   answers.forEach((answer) => {
     const currentStatus = getAnswerStatus(answer);
-    result += points.get(currentStatus);
+    result += PointValue.get(currentStatus);
   });
 
-  result += lives * points.get(`LIFE`);
+  result += lives * PointValue.get(`LIFE`);
 
   return result;
 };
