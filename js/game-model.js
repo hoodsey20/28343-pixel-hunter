@@ -1,11 +1,11 @@
-import {getInitialState, gameQuestions, tick} from './data/game-data';
+import {getInitialState, tick} from './data/game-data';
 import {checkAnswer} from './check-answer';
 import {changeGameState} from './change-game-state';
 
 import {TimerCondition} from './consts';
 
 class GameModel {
-  constructor(name = `Unnamed`, questions = gameQuestions, state = getInitialState()) {
+  constructor(name = `Unnamed`, questions, state = getInitialState()) {
     this._state = state;
     this._questions = questions;
     this._playerName = name;
