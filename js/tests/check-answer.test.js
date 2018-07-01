@@ -1,7 +1,7 @@
 import {assert} from 'chai';
 import {checkAnswer} from './../check-answer';
-import {gameQuestions} from './../data/game-data';
 import {
+  gameQuestions,
   correctAnswer1,
   wrongAnswer1,
   correctAnswer2,
